@@ -19,8 +19,8 @@ g4 = {[0]="alttab", [1]="mute", [2]="winctrl+", [3]="", [4]="winctrl-"}--bok blo
 g6 = {[0]="right", [1]="", [2]="", [3]="", [4]="left"}--verxnia 
 
 
-a = 1; -- Р  РЎвЂ”Р  Р’ВµР РЋР вЂљР  Р’ВµР  РЎВР  Р’ВµР  Р вЂ¦Р  Р вЂ¦Р  Р’В°Р РЋР РЏ Р  Р’В°  
---while a < 20 do -- Р  Р вЂ Р РЋРІР‚в„–Р  РЎвЂ”Р  РЎвЂўР  Р’В»Р  Р вЂ¦Р РЋР РЏР РЋРІР‚С™Р РЋР Р‰ Р РЋРІР‚ Р  РЎвЂР  РЎвЂќР  Р’В» Р  РўвЂР  РЎвЂў Р РЋРІР‚С™Р  Р’ВµР РЋРІР‚В¦ Р  РЎвЂ”Р  РЎвЂўР РЋР вЂљ, Р  РЎвЂ”Р  РЎвЂўР  РЎвЂќР  Р’В° Р  Р’В° Р  РЎВР  Р’ВµР  Р вЂ¦Р РЋР Р‰Р РЋРІвЂљВ¬Р  Р’Вµ 20  
+a = 1; -- Р С—Р ВµРЎР‚Р ВµР СР ВµР Р…Р Р…Р В°РЎРЏ Р В°  
+--while a < 20 do -- Р Р†РЎвЂ№Р С—Р С•Р В»Р Р…РЎРЏРЎвЂљРЎРЉ РЎвЂ Р С‘Р С”Р В» Р Т‘Р С• РЎвЂљР ВµРЎвЂ¦ Р С—Р С•РЎР‚, Р С—Р С•Р С”Р В° Р В° Р СР ВµР Р…РЎРЉРЎв‚¬Р Вµ 20  
   --a = a + 1;  
 --OutputLogMessage("000")
 --mode=1
@@ -50,7 +50,7 @@ function OnEvent(event, arg)
     x_old, y_old= GetMousePosition();
     OutputLogMessage("PRESSED ", x, y, arg);
     a=0
-  --while a < 1 do -- Р  Р вЂ Р РЋРІР‚в„–Р  РЎвЂ”Р  РЎвЂўР  Р’В»Р  Р вЂ¦Р РЋР РЏР РЋРІР‚С™Р РЋР Р‰ Р РЋРІР‚ Р  РЎвЂР  РЎвЂќР  Р’В» Р  РўвЂР  РЎвЂў Р РЋРІР‚С™Р  Р’ВµР РЋРІР‚В¦ Р  РЎвЂ”Р  РЎвЂўР РЋР вЂљ, Р  РЎвЂ”Р  РЎвЂўР  РЎвЂќР  Р’В° Р  Р’В° Р  РЎВР  Р’ВµР  Р вЂ¦Р РЋР Р‰Р РЋРІвЂљВ¬Р  Р’Вµ 20  
+  --while a < 1 do -- Р Р†РЎвЂ№Р С—Р С•Р В»Р Р…РЎРЏРЎвЂљРЎРЉ РЎвЂ Р С‘Р С”Р В» Р Т‘Р С• РЎвЂљР ВµРЎвЂ¦ Р С—Р С•РЎР‚, Р С—Р С•Р С”Р В° Р В° Р СР ВµР Р…РЎРЉРЎв‚¬Р Вµ 20  
   a = a + 1   
   --slep(50)
   --MoveMouseRelative(1000, 1)
@@ -96,11 +96,33 @@ function OnEvent(event, arg)
     x_old=0
     y_old=0
     x_old, y_old= GetMousePosition();
+    --OutputLogMessage(x_old)
     OutputLogMessage("PRESSED ", x, y, arg);
   end
   if (event == "MOUSE_BUTTON_RELEASED" and arg == 6) then
     x, y = GetMousePosition();
-    OutputLogMessage( gesture(g6[0],g6[1],g6[2],g6[3],g6[4]))
+    if (x>= 32767) then
+       --PlayMacro(g6[0])
+       --OutputLogMessage(x)
+       --OutputLogMessage("leva")
+    end 
+    if (x<= 32767) then
+       --PlayMacro(g6[4])
+       --OutputLogMessage(x_old)
+       --OutputLogMessage("pravo")
+    end 
+    
+    if (y>= 62073) then
+       PlayMacro(g6[4])
+       --OutputLogMessage(y)
+       OutputLogMessage("NiJe panelizadach")
+    end 
+    if (y<= 62073) then
+       PlayMacro(g6[0])
+      -- OutputLogMessage(y)
+       OutputLogMessage("Vije panelizadach")
+    end 
+    OutputLogMessage( gesture("",g6[1],g6[2],g6[3],g6[4]))
     OutputLogMessage("RELEASED",x_old, y_old);
 
   end
